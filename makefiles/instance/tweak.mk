@@ -10,11 +10,17 @@ ifeq ($(LOCAL_INSTALL_PATH),)
 endif
 
 _LOCAL_LOGOS_DEFAULT_GENERATOR = $(or $($(THEOS_CURRENT_INSTANCE)_LOGOS_DEFAULT_GENERATOR),$(LOGOS_DEFAULT_GENERATOR),$(_THEOS_TARGET_LOGOS_DEFAULT_GENERATOR),MobileSubstrate)
+ifeq ($(_LOCAL_LOGOS_DEFAULT_GENERATOR),libellekit)
+_THEOS_INTERNAL_LOGOSFLAGS += -c generator=MobileSubstrate
+else
 _THEOS_INTERNAL_LOGOSFLAGS += -c generator=$(_LOCAL_LOGOS_DEFAULT_GENERATOR)
+endif
 
 ifeq ($(_LOCAL_LOGOS_DEFAULT_GENERATOR),MobileSubstrate)
 _THEOS_INTERNAL_LDFLAGS += -F$(THEOS_VENDOR_LIBRARY_PATH) -framework CydiaSubstrate
 else ifeq ($(_LOCAL_LOGOS_DEFAULT_GENERATOR),libhooker)
+_THEOS_INTERNAL_LDFLAGS += -rpath /usr/lib -rpath /var/jb/usr/lib
+else ifeq ($(_LOCAL_LOGOS_DEFAULT_GENERATOR),libellekit)
 _THEOS_INTERNAL_LDFLAGS += -rpath /usr/lib -rpath /var/jb/usr/lib
 endif
 
