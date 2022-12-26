@@ -32,8 +32,14 @@ else
 endif
 
 _THEOS_TARGET_CFLAGS := -isysroot "$(ISYSROOT)" $(VERSIONFLAGS) $(_THEOS_TARGET_CC_CFLAGS)
+ifeq ($(THEOS_CURRENT_ARCH),arm64e)
+_THEOS_TARGET_CFLAGS += -fno-ptrauth-abi-version
+endif
 _THEOS_TARGET_CCFLAGS := $(_TARGET_LIBCPP_CCFLAGS)
 _THEOS_TARGET_LDFLAGS := -isysroot "$(SYSROOT)" $(VERSIONFLAGS) $(LEGACYFLAGS) -multiply_defined suppress $(_TARGET_LIBCPP_LDFLAGS) $(_TARGET_LIBSWIFT_LDFLAGS)
+ifeq ($(THEOS_CURRENT_ARCH),arm64e)
+_THEOS_TARGET_LDFLAGS += -Xlinker -ios_version_min -Xlinker 6.0 # anything between 5.0 (inclusive) to 14.0 (exclusive)
+endif
 
 # if toolchain has prefix, point clang to the ld we want to use
 ifneq ($(_THEOS_TARGET_SDK_BIN_PREFIX),)
