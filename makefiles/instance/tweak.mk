@@ -17,7 +17,7 @@ _THEOS_INTERNAL_LOGOSFLAGS += -c generator=$(_LOCAL_LOGOS_DEFAULT_GENERATOR)
 endif
 
 ifeq ($(_LOCAL_LOGOS_DEFAULT_GENERATOR),MobileSubstrate)
-_THEOS_INTERNAL_LDFLAGS += -F$(THEOS_VENDOR_LIBRARY_PATH) -framework CydiaSubstrate
+_THEOS_INTERNAL_LDFLAGS += -F$(THEOS_VENDOR_LIBRARY_PATH) -rpath /usr/lib -rpath /var/jb/usr/lib -l substrate
 else ifeq ($(_LOCAL_LOGOS_DEFAULT_GENERATOR),libhooker)
 _THEOS_INTERNAL_LDFLAGS += -rpath /usr/lib -rpath /var/jb/usr/lib
 else ifeq ($(_LOCAL_LOGOS_DEFAULT_GENERATOR),libellekit)
