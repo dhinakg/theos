@@ -6,7 +6,7 @@
 	url = https://github.com/theos/headers.git
 [submodule "vendor/lib"]
 	path = vendor/lib
-	url = git@github.com:dhinakg/theos-lib.git
+	url = https://github.com/theos/headers.git
 [submodule "vendor/logos"]
 	path = vendor/logos
 	url = git@github.com:dhinakg/logos.git
