@@ -39,7 +39,7 @@ endif
 
 _THEOS_TARGET_CFLAGS := -isysroot "$(ISYSROOT)" $(VERSIONFLAGS) $(_THEOS_TARGET_CC_CFLAGS)
 ifeq ($(THEOS_CURRENT_ARCH),arm64e)
-ifeq ($(THEOS_USE_NEW_ABI),)
+ifneq ($(THEOS_USE_OLD_ABI),)
 _THEOS_TARGET_CFLAGS += -fno-ptrauth-abi-version
 endif
 endif
@@ -50,8 +50,8 @@ _THEOS_TARGET_LDFLAGS += $(_TARGET_LIBCPP_LDFLAGS)
 endif
 
 ifeq ($(THEOS_CURRENT_ARCH),arm64e)
-ifeq ($(THEOS_USE_NEW_ABI),)
-_THEOS_TARGET_LDFLAGS += -Xlinker -ios_version_min -Xlinker 6.0 # anything between 5.0 (inclusive) to 14.0 (exclusive)
+ifneq ($(THEOS_USE_OLD_ABI),)
+_THEOS_TARGET_LDFLAGS += -ld_classic -Xlinker -ios_version_min -Xlinker 6.0 # anything between 5.0 (inclusive) to 14.0 (exclusive)
 endif
 endif
 
