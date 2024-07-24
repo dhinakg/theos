@@ -14,6 +14,8 @@ if [[ $TARGET_INSTALL_REMOTE == 1 ]]; then
 	args+=("$@")
 
 	exec ${args[@]}
+elif [[ "$_THEOS_TARGET_PLATFORM_IS_SIMULATOR" == "1" ]]; then
+	exec bash -c  "$@"
 else
 	exec su root -c "$@"
 fi

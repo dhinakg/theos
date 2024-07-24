@@ -6,7 +6,7 @@ _THEOS_TARGET_PLATFORM_NAME := watchsimulator
 _THEOS_TARGET_PLATFORM_SDK_NAME := WatchSimulator
 _THEOS_TARGET_PLATFORM_FLAG_NAME := watchos-simulator
 _THEOS_TARGET_PLATFORM_SWIFT_NAME := apple-watchos
-_THEOS_TARGET_PLATFORM_IS_SIMULATOR := $(_THEOS_TRUE)
+export _THEOS_TARGET_PLATFORM_IS_SIMULATOR := $(_THEOS_TRUE)
 _THEOS_DARWIN_CAN_USE_MODULES := $(_THEOS_TRUE)
 
 NEUTRAL_ARCH := i386
@@ -19,7 +19,7 @@ internal-install::
 	$(ERROR_BEGIN)"$(MAKE) install for the simulator requires that you set WATCHOS_SIMULATOR_ROOT to the root directory of the simulated OS."$(ERROR_END)
 else
 internal-install:: stage
-	$(ECHO_NOTHING)install.mergeDir "$(THEOS_STAGING_DIR)" "$(WATCHOS_SIMULATOR_ROOT)"$(ECHO_END)
+	$(ECHO_INSTALLING)install.mergeDir "$(THEOS_STAGING_DIR)" "$(WATCHOS_SIMULATOR_ROOT)"$(ECHO_END)
 endif
 
 _TARGET_OBJC_ABI_CFLAGS = -fobjc-abi-version=2 -fobjc-legacy-dispatch

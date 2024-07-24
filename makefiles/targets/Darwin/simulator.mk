@@ -6,7 +6,7 @@ _THEOS_TARGET_PLATFORM_NAME := iphonesimulator
 _THEOS_TARGET_PLATFORM_SDK_NAME := iPhoneSimulator
 _THEOS_TARGET_PLATFORM_FLAG_NAME := ios-simulator
 _THEOS_TARGET_PLATFORM_SWIFT_NAME := apple-ios
-_THEOS_TARGET_PLATFORM_IS_SIMULATOR := $(_THEOS_TRUE)
+export _THEOS_TARGET_PLATFORM_IS_SIMULATOR := $(_THEOS_TRUE)
 
 include $(THEOS_MAKE_PATH)/targets/_common/darwin_head.mk
 
@@ -15,7 +15,7 @@ internal-install::
 	$(ERROR_BEGIN)"$(MAKE) install for the simulator requires that you set IPHONE_SIMULATOR_ROOT to the root directory of the simulated OS."$(ERROR_END)
 else
 internal-install:: stage
-	$(ECHO_NOTHING)install.mergeDir "$(THEOS_STAGING_DIR)" "$(IPHONE_SIMULATOR_ROOT)"$(ECHO_END)
+	$(ECHO_INSTALLING)install.mergeDir "$(THEOS_STAGING_DIR)" "$(IPHONE_SIMULATOR_ROOT)"$(ECHO_END)
 endif
 
 # We have to figure out the target version here, as we need it in the calculation of the deployment version.

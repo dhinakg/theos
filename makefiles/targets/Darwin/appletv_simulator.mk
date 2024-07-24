@@ -6,7 +6,7 @@ _THEOS_TARGET_PLATFORM_NAME := appletvos
 _THEOS_TARGET_PLATFORM_SDK_NAME := AppleTVSimulator
 _THEOS_TARGET_PLATFORM_FLAG_NAME := tvos-simulator
 _THEOS_TARGET_PLATFORM_SWIFT_NAME := apple-tvos
-_THEOS_TARGET_PLATFORM_IS_SIMULATOR := $(_THEOS_TRUE)
+export _THEOS_TARGET_PLATFORM_IS_SIMULATOR := $(_THEOS_TRUE)
 _THEOS_DARWIN_CAN_USE_MODULES := $(_THEOS_TRUE)
 
 NEUTRAL_ARCH := x86_64
@@ -21,7 +21,7 @@ internal-install::
 	$(ERROR_BEGIN)"$(MAKE) install for the simulator requires that you set APPLETV_SIMULATOR_ROOT to the root directory of the simulated OS."$(ERROR_END)
 else
 internal-install:: stage
-	$(ECHO_NOTHING)install.mergeDir "$(THEOS_STAGING_DIR)" "$(APPLETV_SIMULATOR_ROOT)"$(ECHO_END)
+	$(ECHO_INSTALLING)install.mergeDir "$(THEOS_STAGING_DIR)" "$(APPLETV_SIMULATOR_ROOT)"$(ECHO_END)
 endif
 
 _TARGET_OBJC_ABI_CFLAGS = -fobjc-abi-version=2 -fobjc-legacy-dispatch
